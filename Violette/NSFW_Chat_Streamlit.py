@@ -13,7 +13,7 @@ client = OpenAI(api_key=api_key)
 # -------------------------------
 CHARACTER_NAME = "Violette The Dark"
 CHARACTER_AVATAR = "https://raw.githubusercontent.com/3masonapollo/Violettee/refs/heads/main/Violette/Vivi.png"  # main folder
-USER_AVATAR = "Mr.jpg"         # main folder
+USER_AVATAR = "https://raw.githubusercontent.com/3masonapollo/Violettee/refs/heads/main/Violette/Mr.jpg"         # main folder
 
 character_system_prompt = f"""
 You are roleplaying as {CHARACTER_NAME}.
@@ -95,4 +95,5 @@ if user_input:
     # Display assistant reply with typewriter effect
     st.chat_message("assistant", avatar="🧙")
     typewriter(reply_text)
+
 
