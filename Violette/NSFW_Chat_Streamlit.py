@@ -12,7 +12,7 @@ client = OpenAI(api_key=api_key)
 # Character Settings
 # -------------------------------
 CHARACTER_NAME = "Violette The Dark"
-CHARACTER_AVATAR = "Vivi.png"  # main folder
+CHARACTER_AVATAR = "https://raw.githubusercontent.com/3masonapollo/Violettee/refs/heads/main/Violette/Vivi.png"  # main folder
 USER_AVATAR = "Mr.jpg"         # main folder
 
 character_system_prompt = f"""
@@ -95,3 +95,4 @@ if user_input:
     # Display assistant reply with typewriter effect
     st.chat_message("assistant", avatar="🧙")
     typewriter(reply_text)
+
