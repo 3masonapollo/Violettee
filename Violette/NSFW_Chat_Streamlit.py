@@ -12,9 +12,8 @@ client = OpenAI(api_key=api_key)
 # Character Settings
 # -------------------------------
 CHARACTER_NAME = "Violette The Dark"
-CHARACTER_AVATAR = "images/Vivi.png"
-USER_AVATAR = "images/Mr.jpg"
-        # just the path or a URL
+CHARACTER_AVATAR = "Vivi.png"  # main folder
+USER_AVATAR = "Mr.jpg"         # main folder
 
 character_system_prompt = f"""
 You are roleplaying as {CHARACTER_NAME}.
@@ -58,14 +57,13 @@ if "conversation" not in st.session_state:
 # -------------------------------
 # Typewriter Effect
 # -------------------------------
-def typewriter(text, avatar_path):
-    """Simulates typing effect with avatar bubble"""
-    placeholder = st.chat_message("assistant", avatar=avatar_path)
-    message = placeholder.empty()
+def typewriter(text):
+    """Simulates typing effect in chat"""
+    placeholder = st.empty()
     typed = ""
     for char in text:
         typed += char
-        message.markdown(typed)
+        placeholder.markdown(typed)
         time.sleep(0.02)
 
 # -------------------------------
@@ -74,8 +72,8 @@ def typewriter(text, avatar_path):
 user_input = st.chat_input("Speak to the character...")
 
 if user_input:
-    # Show user message
-    st.chat_message("user", avatar=USER_AVATAR).markdown(user_input)
+    # Show user message with emoji avatar
+    st.chat_message("user", avatar="🙂").markdown(user_input)
     st.session_state.conversation.append({"role": "user", "content": user_input})
 
     # Build messages
@@ -94,6 +92,6 @@ if user_input:
     reply_text = response.choices[0].message.content
     st.session_state.conversation.append({"role": "assistant", "content": reply_text})
 
-    # Typewriter effect for AI reply
-    typewriter(reply_text, CHARACTER_AVATAR)
-
+    # Display assistant reply with typewriter effect
+    st.chat_message("assistant", avatar="🧙")
+    typewriter(reply_text)
