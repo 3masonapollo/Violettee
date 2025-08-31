@@ -5,15 +5,15 @@ from openai import OpenAI
 # -------------------------------
 # Setup OpenAI API
 # -------------------------------
-api_key = st.secrets["OPENAI_API_KEY"]  # Use Streamlit secrets for safety
+api_key = st.secrets["OPENAI_API_KEY"]  # Use Streamlit secrets
 client = OpenAI(api_key=api_key)
 
 # -------------------------------
 # Character Settings
 # -------------------------------
 CHARACTER_NAME = "Violette The Dark"
-CHARACTER_AVATAR = "https://raw.githubusercontent.com/3masonapollo/Violettee/refs/heads/main/Violette/Vivi.png"  # main folder
-USER_AVATAR = "https://raw.githubusercontent.com/3masonapollo/Violettee/refs/heads/main/Violette/Mr.jpg"         # main folder
+CHARACTER_AVATAR = "https://raw.githubusercontent.com/3masonapollo/Violettee/main/Violette/Vivi.png"
+USER_AVATAR = "https://raw.githubusercontent.com/3masonapollo/Violettee/main/Violette/Mr.jpg"
 
 character_system_prompt = f"""
 You are roleplaying as {CHARACTER_NAME}.
@@ -57,9 +57,7 @@ if "conversation" not in st.session_state:
 # -------------------------------
 # Typewriter Effect
 # -------------------------------
-def typewriter(text):
-    """Simulates typing effect in chat"""
-    placeholder = st.empty()
+def typewriter(text, placeholder):
     typed = ""
     for char in text:
         typed += char
@@ -72,8 +70,8 @@ def typewriter(text):
 user_input = st.chat_input("Speak to the character...")
 
 if user_input:
-    # Show user message with emoji avatar
-    st.chat_message("user", avatar="🙂").markdown(user_input)
+    # Show user message
+    st.chat_message("user").markdown(user_input)
     st.session_state.conversation.append({"role": "user", "content": user_input})
 
     # Build messages
@@ -92,8 +90,6 @@ if user_input:
     reply_text = response.choices[0].message.content
     st.session_state.conversation.append({"role": "assistant", "content": reply_text})
 
-    # Display assistant reply with typewriter effect
-    st.chat_message("assistant", avatar="🧙")
-    typewriter(reply_text)
-
-
+    # Display assistant reply with typewriter
+    placeholder = st.chat_message("assistant").empty()
+    typewriter(reply_text, placeholder)
