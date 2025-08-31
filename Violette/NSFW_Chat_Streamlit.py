@@ -12,8 +12,9 @@ client = OpenAI(api_key=api_key)
 # Character Settings
 # -------------------------------
 CHARACTER_NAME = "Violette The Dark"
-CHARACTER_AVATAR = "Vivi.png"  # just the path or a URL
-USER_AVATAR = "Mr.jpg"         # just the path or a URL
+CHARACTER_AVATAR = "images/Vivi.png"
+USER_AVATAR = "images/Mr.jpg"
+        # just the path or a URL
 
 character_system_prompt = f"""
 You are roleplaying as {CHARACTER_NAME}.
@@ -95,3 +96,4 @@ if user_input:
 
     # Typewriter effect for AI reply
     typewriter(reply_text, CHARACTER_AVATAR)
+
